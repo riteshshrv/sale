@@ -235,6 +235,9 @@ class Sale(Workflow, ModelSQL, ModelView):
 
     @classmethod
     def __register__(cls, module_name):
+
+        """" This change is specific to fulfil. Because of the wrong migration
+        we are not able to create new field with name packing.
         pool = Pool()
         SaleLine = pool.get('sale.line')
         TableHandler = backend.get('TableHandler')
@@ -315,6 +318,7 @@ class Sale(Workflow, ModelSQL, ModelView):
         # Add index on create_date
         table = TableHandler(cursor, cls, module_name)
         table.index_action('create_date', action='add')
+        """
 
     @classmethod
     def default_payment_term(cls):
